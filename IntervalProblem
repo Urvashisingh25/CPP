@@ -1,0 +1,39 @@
+#include<set>
+#include<iostream>
+#include<algorithm>
+#include<limits.h>
+using namespace std;
+
+int main(){
+    
+    set< pair<int,int> >intervals;
+    intervals.insert({10,20});
+    intervals.insert({301,400});
+    intervals.insert({201,300});
+    intervals.insert({101,200});
+    intervals.insert({401,500});
+    
+    /*
+    10,20
+    101,200
+    201,300
+    301,400
+    401,500
+    */
+    
+    //find in which interval(inclusive) 300 is present({201,300}) or 15 is present
+    int point=300;
+    auto itr=intervals.upper_bound({point,INT_MAX});//gives 301,400
+    //go one step back
+    itr--;
+    
+    pair<int,int> current=*itr;
+    
+    if(point>=current.first && point<=current.second)
+    {
+    cout<<current.first<<endl;
+    cout<<current.second<<endl;
+    }
+    else cout<<"The point is not lying in any of the interval";
+    
+}
