@@ -1,0 +1,140 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<set>
+#include<map>
+using namespace std;
+
+bool c(int x,int y){
+    return x>y;
+}
+
+void VectorDemo(){
+    cout<<"IN VECTOR DEMO METHOD\n";
+ vector<int> A={1,6,3,2,7,8};
+ 
+ //accessing elements
+ cout<<"second element is "<<A[1]<<endl;
+ cout<<"third element is "<<A[2]<<endl;
+ 
+ //searching (binary search)
+ bool present=binary_search(A.begin(),A.end(),6);
+ cout<<"6 is present "<<present<<endl;
+ 
+ //inserting elements 
+ A.push_back(25);
+ A.push_back(50);
+ A.push_back(25);
+ A.push_back(35);
+ 
+  //sorting
+ sort(A.begin(),A.end());//O(NlogN)
+ 
+ //printing
+ cout<<"ascending order ";
+ for(int x:A){
+     cout<<x<<" ";
+ }
+ cout<<endl;
+ 
+ //lower bound gives the first element which is >=(greater) 25
+ vector<int>::iterator i=lower_bound(A.begin(),A.end(),25);
+ 
+ //lower bound gives the first element which is >(strictly greater) 25
+ vector<int>::iterator i1=upper_bound(A.begin(),A.end(),25);// we can also write it as     auto i
+ cout<<"lower bound of 25 is "<<*i<<" upper bound of 25 is "<<*i1<<endl;
+ 
+ auto i3=lower_bound(A.begin(),A.end(),1);
+ cout<<"lower bound of 1 "<<*i3<<endl;
+ 
+ //we can also find the number of occurences of an elemnt by subtracting lower bound and upper bound of it
+ cout<<"number of occurences of 25 is "<<i1-i<<endl;
+ 
+ //sorting in  reverse order
+ sort(A.begin(),A.end(),c);//where c is a comparator function and it return true or false
+ //another way to print the vector
+ vector<int>::iterator itr;
+ cout<<"reverse sorted ";
+ for(itr=A.begin();itr!=A.end();itr++){
+     cout<<*itr<<" ";
+ }
+ cout<<endl;
+ 
+ //modifying each element of the vector
+ for(int &x:A){//reference
+     x++;
+ }
+ cout<<"modified vector ";
+ for(int x:A){
+     cout<<x<<" ";
+ }
+ }
+ 
+ 
+ void SetDemo(){
+     cout<<"\nIN SETDEMO METHOD\n";
+     set<int> S;
+     S.insert(4);
+     S.insert(5);
+     S.insert(25);
+     S.insert(40);
+     S.insert(14);
+     S.insert(3);
+     
+     for(int x:S) cout<<x<<" ";
+     cout<<endl;
+     
+     //searching an element
+     auto it=S.find(25);
+     cout<<*it<<endl;
+     
+     //if an element is not present it will return S.end
+     auto it2=S.find(100);
+     if(it2==S.end()) cout<<"not present\n";
+     else cout<<"present\n";
+     
+     //lower bound
+     auto it3=S.lower_bound(25);
+     auto it4=S.lower_bound(35);
+     cout<<*it3<<" "<<*it4<<endl;
+     
+     //upper bound
+     auto it5=S.upper_bound(25);
+     auto it6=S.upper_bound(45);
+     cout<<*it5<<" "<<*it6<<endl;
+     
+     //number of occurences of 25
+     //cout<<"25 occured "<<it5-it3;//error because iterators for sets are bidirectional
+     if(it6==S.end()){
+         cout<<"Can't find it\n";
+     }
+     S.erase(4);
+     for(int x:S) cout<<x<<endl;
+ }
+ 
+ 
+ void MapDemo(){
+     
+     cout<<"IN MAPDEMO FUNCTION";
+     map<int,int> mySet;
+     mySet[1]=25;
+     mySet[2]=29;
+     mySet[5]=9;
+     
+     map<char,int> count;
+     string name="urvashi singh";
+     for(char x:name){
+         count[x]++;//number of times x ispresent
+     }
+     cout<<" r occured "<<count['r']<<" times in "<<name<<endl;
+     cout<<" i occured "<<count['i']<<" times in "<<name<<endl;
+     cout<<" h occured "<<count['h']<<" times in "<<name<<endl;
+ }
+int main(){
+    VectorDemo();
+    SetDemo();
+    MapDemo();
+    return 0;
+}
+
+
