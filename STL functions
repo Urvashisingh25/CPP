@@ -1,6 +1,7 @@
 #include<iostream>
 #include<algorithm>
 #include<utility>
+#include<cmath>
 
 using namespace std;
 
@@ -129,6 +130,8 @@ int main(){
     // G C D
     cout<<"GCD of "<<x<<" and "<< y <<" is "<<__gcd(x,y)<<endl;
     
+    //power
+    cout<<"Power of 2^10 : "<<pow(2,10);
     cout<<endl<<endl;
 
     return 0;
