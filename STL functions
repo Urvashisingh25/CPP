@@ -1,0 +1,135 @@
+#include<iostream>
+#include<algorithm>
+#include<utility>
+
+using namespace std;
+
+void printArray(int *arr){
+
+    for(int i=0;arr[i];i++) cout<<arr[i]<<" ";
+}
+
+struct Intervals{
+        int start;
+        int end;
+    };
+    
+//comparator function for interval sorting based on start value    
+bool Start(Intervals i1,Intervals i2){
+    return i1.start<i2.start;
+}
+    
+//comparator function for interval sorting based on end value    
+bool End(Intervals i1,Intervals i2){
+    return i1.end<i2.end;
+}
+    
+int main(){
+    
+    //   S O R T I N G
+
+    int arr[]={2,5,1,3,2,7,8};
+    
+    //Ascending order
+    cout<<"Sorted array in ascending order\n";
+    sort(arr,arr+7);
+    
+    //printing the arr
+    for(int x:arr)
+    cout<<x<<" ";
+    
+    cout<<endl;
+    cout<<endl;
+    
+    //Partial sorting
+    int ar[]={3,5,6,1,2,5,1};
+    cout<<"Sorted array from 2nd element to 6th element\n";
+    sort(ar+1,ar+6);
+    
+    //printing the arr using user defined function
+    printArray(ar);
+    cout<<endl;
+    cout<<endl;
+    
+    //Descending order
+    cout<<"Sorting in descending order\n";
+    sort(ar,ar+7,greater<int>());
+    printArray(ar);
+    
+    cout<<endl<<endl;
+    
+    //Sorting intervals
+    
+    /*struct Intervals{
+        int start;
+        int end;
+    }*/
+    Intervals a[]={{2,5},{6,10},{4,19},{1,8}};
+    
+    //sorting based on start value
+    sort(a,a+4,Start); //here start is a comparator function which we can define
+    
+    cout<<"Sorting interval on start value\n";
+    
+    for(int i=0;i<4;i++){
+        cout<<"{"<<a[i].start<<" : "<<a[i].end<<"}"<<endl;
+    }
+    cout<<endl<<endl;
+    
+    //sorting based on end value
+    sort(a,a+4,End); //here end is a comparator function which we can define
+    
+    cout<<"Sorting interval on end value\n";
+    
+    for(int i=0;i<4;i++){
+        cout<<"{"<<a[i].start<<" : "<<a[i].end<<"}"<<endl;
+    }
+    
+    cout<<endl<<endl;
+    
+    
+    // S E A R C H I N G
+    
+    // Binary search works only when array is sorted in ascending order
+    sort(ar,ar+7);
+    printArray(ar);
+    cout<<endl;
+    
+    //Binary search: return 1 when key is found and 0 when not found
+    cout<<binary_search(ar,ar+7,3)<<" (if 0 then not found if 1 then found )\n";
+    cout<<binary_search(ar,ar+7,7)<<" (if 0 then not found if 1 then found )\n";
+    
+    //To get the index of an element we can use lower_bound
+    //Lower Bound
+    cout<<"index of 3 is "<<lower_bound(ar,ar+7,3)-ar<<endl;
+    
+    //upper Bound
+    cout<<"Upper bound of 3 is "<<*upper_bound(ar,ar+7,3)<<endl;
+    
+    //number of occurences of an element
+    cout<<"Number 3 has occured "<<*upper_bound(ar,ar+7,3)-*lower_bound(ar,ar+7,3)<<" times"<<endl;
+    cout<<endl<<endl;
+    
+    // S W A P
+    int x=10, y=20;
+    cout<<"x : "<<x<<" y : "<<y<<endl;
+    swap(x,y);
+    cout<<"x : "<<x<<" y : "<<y<<endl;
+    cout<<endl<<endl;
+    
+    // M A X
+    cout<<"Maximum of "<<x<<" and "<< y <<" is "<<max(x,y)<<endl;
+    
+    // M I N
+    cout<<"Minimum of "<<x<<" and "<< y <<" is "<<min(x,y)<<endl;
+    
+    x=12;
+    y=30;
+    
+    // G C D
+    cout<<"GCD of "<<x<<" and "<< y <<" is "<<__gcd(x,y)<<endl;
+    
+    cout<<endl<<endl;
+
+    return 0;
+}
