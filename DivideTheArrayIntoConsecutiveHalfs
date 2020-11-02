@@ -1,0 +1,71 @@
+/******************************************************************************
+
+                    Check if you can divide the array into two consecutive halves 
+                    such that  the sum of left sub array is equal to 
+                    that of right sub array by moving one element
+                    
+                    INPUT  3
+                           1 3 2 
+                    OUTPUT YES
+                    
+                    INPUT  5
+                           1 2 3 4 5 
+                    OUTPUT NO
+                    
+                    INPUT  5
+                           2 2 3 4 5 
+                    OUTPUT YES
+
+*******************************************************************************/
+#include<iostream>
+#include<vector>
+#include<unordered_map>
+
+using namespace std;
+
+int main(){
+    
+    int n;
+    cin>>n;
+    
+    vector<int> A(n+5,0);
+    
+    long long s=0,ss=0;
+    
+    for(int i=0;i<n;i++) cin>>A[i] , s+=A[i];
+    
+    if(s&1){
+        
+     cout<<"NO\n";
+    return 0;
+    }
+    
+    unordered_map<long long,int>left,right;
+    
+    left[A[0]]++;
+    
+    for(int i=1;i<n;i++) right[A[i]]++;
+    
+    for(int i=0;i<n;i++){
+        ss+=A[i];
+        if(ss==s/2) {
+            cout<<"YES\n";
+            return 0;
+        }
+        
+        else if(ss<s/2){
+            long long x=s/2-ss;
+            if(right[x]>0) cout<<"YES\n";
+            return 0;
+        }
+        else{
+            long long y=ss-s/2;
+            if(left[y]>0) cout<<"YES\n";
+            return 0;
+        }
+        left[A[i+1]]++;
+        right[A[i+1]]--;
+    }
+    cout<<"NO\n";
+    return 0;
+}
