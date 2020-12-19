@@ -1,0 +1,27 @@
+/******************************************************************************
+
+Euclid Algorithm of gcd
+
+if a>b then gcd(a,b) is gcd(b,a%b) till a%b=0
+
+time complexity:- log(max(a,b))
+
+*******************************************************************************/
+#include <iostream>
+using namespace std;
+
+int GCD(int x,int y){
+    if(x<y)//spl case
+     return GCD(y,x);
+    if(y==0)
+    return x;
+    return GCD(y,x%y);
+}
+int main()
+{
+    //printf("Hello World");
+    int a,b;
+    cin>>a>>b;
+    cout<<GCD(a,b)<<endl;
+    return 0;
+}
